@@ -3,23 +3,29 @@ Streaming producer
 """
 import requests
 from kafka import KafkaProducer
-producer = kafkaProducer(bootstrap = '10.170.0.26:9092')
+import json
+from time import sleep
+
+producer = KafkaProducer(bootstrap_servers='10.170.0.26:9092')
 
 TOPIC = 'info'
 url = 'https://randomuser.me/api/'
 try :
 
-    raw = requests.get(url)
-    re = raw["results"][0]
+    response = requests.get(url)
+    data = response.json()
+    re = data["results"][0]
+    print("Read data finish")
     name = re["name"]["first"]
     city = re["location"]["city"]
     email = re["email"]
     birth = re["dob"]["date"]
     age = re["dob"]["age"]
-    record = (name, city, email, birth, age)
-    message = bytearray(record.encode("utf-8"))
+    record = (name, city, email, birth, age) #tuple
+    message = json.dumps(record).encode("utf-8") #change to string and encode
     producer.send(TOPIC, message)
     sleep(30)
+    print("done")
 except :
-    Print("Cannot run code")
+    print("Cannot run code")
 
