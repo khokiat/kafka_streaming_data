@@ -3,7 +3,7 @@ Streaming producer
 """
 import requests
 from kafka import KafkaProducer
-producer = kafkaProducer(bootstrap = 'local host:9092')
+producer = kafkaProducer(bootstrap = '10.170.0.26:9092')
 
 TOPIC = 'info'
 url = 'https://randomuser.me/api/'
