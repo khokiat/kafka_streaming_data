@@ -6,9 +6,9 @@ from kafka import KafkaProducer
 import json
 from time import sleep
 
-producer = KafkaProducer(bootstrap_servers='10.170.0.26:9092')
+producer = KafkaProducer(bootstrap_servers='10.170.0.27:9092')
 
-TOPIC = 'info'
+TOPIC = 'information'
 url = 'https://randomuser.me/api/'
 try :
 
