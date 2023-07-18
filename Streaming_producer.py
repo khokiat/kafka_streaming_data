@@ -10,8 +10,8 @@ producer = KafkaProducer(bootstrap_servers='10.170.0.27:9092')
 
 TOPIC = 'information'
 url = 'https://randomuser.me/api/'
-try :
 
+for i in range (10000) : 
     response = requests.get(url)
     data = response.json()
     re = data["results"][0]
@@ -26,6 +26,5 @@ try :
     producer.send(TOPIC, message)
     sleep(30)
     print("done")
-except :
-    print("Cannot run code")
+print("Cannot run code")
 

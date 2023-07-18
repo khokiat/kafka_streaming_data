@@ -1,9 +1,10 @@
 from datetime import datetime
 from kafka import KafkaConsumer
 import mysql.connector
+import ast
 
 TOPIC = 'information'
-DATABASE = 'information'
+DATABASE = 'info'
 USERNAME = 'root'
 PASSWORD = 'test-kafka'
 
@@ -21,17 +22,35 @@ try:
         for msg in consumer:
             # Extract information from Kafka
             message = msg.value.decode("utf-8")
-
+            print(message)
             # Transform
-            (name, city, email, birth, age) = message.split(",")
+            my_list = ast.literal_eval(message)
+            (name, city, email, birth_str, age_str) = my_list
+            print(age_str)
+            print(birth_str)
+        
+            # Convert age_str to an integer
+            age = int(float(age_str))
+        
+            # Convert the date string to a datetime object
+            try :
+                date = datetime.strptime(birth_str, "%Y-%m-%d %H:%M:%S.%f")
+                birth = date.strftime("%Y-%m-%d %H:%M:%S")
+            except ValueError:
+                date = datetime.strptime(birth_str, '%Y-%m-%dT%H:%M:%S.%fZ')
+                birth = date.strftime("%Y-%m-%d %H:%M:%S")
+
+            print("Data transformation is finished")
 
             # Loading data into the database table
-            sql = "INSERT INTO info (name, city, email, birth, age) VALUES (%s, %s, %s, %s, %s)"
+            sql = "INSERT INTO info (name, city, email, Birth, Age) VALUES (%s, %s, %s, %s, %s)"
             data = (name, city, email, birth, age)
             cursor.execute(sql, data)
 
             print("Data was inserted into the database")
             connection.commit()
 
-except Exception as e:
-    print("Could not connect to the database or encountered an error:", e)
+except mysql.connector.Error as e:
+    print("Could not execute the SQL statement:", e)
+
+    
