@@ -1,0 +1,6 @@
+pip == 21.2.4
+java == 11
+default-mysql-client == latest_version
+kafka == 2.12-2.8.0
+kafka-python == latest_version
+mysql-connector-python==8.0.31
