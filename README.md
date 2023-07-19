@@ -86,4 +86,4 @@ $python3 streaming_consumer.py
 After running code, producer will calling API to retrive data from API then transform to message and pass to kafka topic. Then, consumer will retrieve data from kafka topic and transform data type into the form that we've set in Mysql database. finnally, consumer will insert data into database completely as table below. 
 ![image](https://github.com/khokiat/kafka_streaming_data/blob/main/Image/Image%2019-7-2566%20BE%20at%2014.21.jpg)
 
-In the picture, we displayed data able by using Dbeaver to connect to Mysql database.
+***In the picture, we displayed data table by using Dbeaver program to connect to Mysql database to help displaying datatable.
