@@ -1,6 +1,7 @@
 # kafka_python_streaming_data
 This project will retrive data by calling API and pass data to Mysql database by using kafka interacting with python.
 By this project will be composed all service in google cloud platform.
+![image](https://github.com/khokiat/kafka_streaming_data/blob/main/Image/data%20architecture.drawio)
 
 ## Prerequisition & tools
 1. Mysql 8.0
